@@ -3,6 +3,7 @@ using Encapsulation.Employment;
 using System;
 using Encapsulation.Calendar;
 using Encapsulation.Banking;
+using Encapsulation.Extra;
 
 namespace Encapsulation;
 
@@ -53,6 +54,27 @@ public class Program
         Console.WriteLine($"Balance after withdrawal: {account.GetBalance()}");
 
         // Extra
+        // Membuat dua objek EmployeeExtra
+        EmployeeExtra employee3 = new EmployeeExtra("John", "Smith", 3000);
+        EmployeeExtra employee4 = new EmployeeExtra("Jane", "Smith", 3500);
 
+        // Mengajukan pinjaman
+        employee3.ApplyForLoan(12000); // Diterima, 12000 adalah 4x dari 3000
+        employee4.ApplyForLoan(20000); // Ditolak, batas pinjaman adalah 5x 3500
+
+        // Menampilkan status pinjaman
+        Console.WriteLine(employee3.GetLoanStatus());
+        Console.WriteLine(employee4.GetLoanStatus());
+
+        // Memecat karyawan pertama
+        employee3.Terminate();
+        Console.WriteLine(employee3.GetLoanStatus());
+
+        // Coba mengajukan pinjaman setelah dipecat
+        employee3.ApplyForLoan(1000); // Gagal karena sudah dipecat
+
+        // Karyawan pertama mencoba membayar pinjaman
+        employee3.RepayLoan(5000); // Sukses bayar
+        Console.WriteLine(employee3.GetLoanStatus());
     }
 }
